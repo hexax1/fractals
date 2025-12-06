@@ -29,7 +29,9 @@ public class FractalBuilder {
 
 //                System.out.println("BUILDING iteration " + iteration + "...");
                 if (iteration==iterations) {
-                    TreeBuilder.buildThreeFractal(sentenceHolder, x, y, z, delta, length, radius, world, player, iteration, Blocks.OAK_WOOD, decay);
+                    server.execute(() -> {
+                        TreeBuilder.buildThreeFractal(sentenceHolder, x, y, z, delta, length, radius, world, player, iteration, Blocks.OAK_WOOD, decay);
+                    });
                 }
 
                 i++;
@@ -66,12 +68,10 @@ public class FractalBuilder {
                 System.out.println("BUILDING iteration " + iteration + "...");
                 System.out.println(block);
 //                System.out.println(Arrays.toString(sentenceHolder));
-                if (block.equals(Blocks.BLACK_CONCRETE) && iteration==iterations) {
-                    TreeBuilder.buildThreeFractal(sentenceHolder, x, y, z, delta, length, radius, world, player, iteration, block, decay);
-                } else if (!block.equals(Blocks.BLACK_CONCRETE) && iteration==iterations){
-//                    System.out.println('e');
-                    TreeBuilder.buildThreeFractal(sentenceHolder, x, y, z, delta, length, radius, world, player, iteration, block, decay);
-//                    System.out.println("built layer");
+                if (iteration==iterations) {
+                    server.execute(() -> {
+                        TreeBuilder.buildThreeFractal(sentenceHolder, x, y, z, delta, length, radius, world, player, iteration, block, decay);
+                    });
                 }
 
 
